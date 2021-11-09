@@ -1,0 +1,13 @@
+FROM golang
+
+WORKDIR /app
+
+COPY . .
+
+RUN go mod download
+
+EXPOSE 3000
+
+RUN go build -o rest-api
+
+CMD [ "./rest-api" ]
