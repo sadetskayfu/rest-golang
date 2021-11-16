@@ -5,9 +5,9 @@ import (
 	"github.com/sadetskayfu/rest-golang/internal/model"
 )
 
-// CREATE
-func (s *Service) CreateCustomer(u *model.Customer) (*model.Customer, error) {
+// CreateCustomer service ...
 
+func (s *Service) CreateCustomer(u *model.Customer) (*model.Customer, error) {
 	res, err := s.repo.CreateCustomer(u)
 	if err != nil {
 		return nil, err
@@ -15,7 +15,8 @@ func (s *Service) CreateCustomer(u *model.Customer) (*model.Customer, error) {
 	return res, nil
 }
 
-// GET ALL
+// GetAllCustomer service...
+
 func (s *Service) GetAllCustomer() ([]*model.Customer, error) {
 	res, err := s.repo.GetAllCustomer()
 	if err != nil {
@@ -24,27 +25,30 @@ func (s *Service) GetAllCustomer() ([]*model.Customer, error) {
 	return res, nil
 }
 
-// GET BY ID
-func (s *Service) GetByIdCustomer(id uuid.UUID) (*model.Customer, error) {
-	res, err := s.repo.GetByIdCustomer(id)
+// GetByIdCustomer service...
+
+func (s *Service) GetByIDCustomer(ID uuid.UUID) (*model.Customer, error) {
+	res, err := s.repo.GetByIDCustomer(ID)
 	if err != nil {
 		panic(err)
 	}
 	return res, nil
 }
 
-// DELETE BY ID
-func (s *Service) DeleteByIdCustomer(id uuid.UUID) (string, error) {
-	res, err := s.repo.DeleteByIdCustomer(id)
+// DeleteByIdCustomer service...
+
+func (s *Service) DeleteByIDCustomer(ID uuid.UUID) (string, error) {
+	res, err := s.repo.DeleteByIDCustomer(ID)
 	if err != nil {
 		panic(err)
 	}
 	return res, nil
 }
 
-// UPDATE BY ID
-func (s *Service) UpdateByIdCustomer(id uuid.UUID, u *model.Customer) (*model.Customer, error) {
-	res, err := s.repo.UpdateByIdCustomer(id, u)
+// UpdateByIdCustomer service...
+
+func (s *Service) UpdateByIDCustomer(ID uuid.UUID, u *model.Customer) (*model.Customer, error) {
+	res, err := s.repo.UpdateByIDCustomer(ID, u)
 	if err != nil {
 		panic(err)
 	}

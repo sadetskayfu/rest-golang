@@ -6,6 +6,8 @@ import (
 	"github.com/sadetskayfu/rest-golang/internal/model"
 )
 
+// Registration handler...
+
 func (h *Handler)Registration(c echo.Context) error {
 	u := &model.User{}
 	err := c.Bind(u)
@@ -18,6 +20,8 @@ func (h *Handler)Registration(c echo.Context) error {
 	}
 	return c.JSON(http.StatusCreated, res)
 }
+
+// LogIn handler...
 
 func (h *Handler) LogIn(c echo.Context) error {
 	u := &model.AuthUser{}

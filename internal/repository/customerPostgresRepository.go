@@ -2,12 +2,12 @@ package repository
 
 import (
 	"context"
-
 	"github.com/google/uuid"
 	"github.com/sadetskayfu/rest-golang/internal/model"
 )
 
-// GET ALL
+// GetAllCustomer in postgres db...
+
 func (r *PostgresRepository) GetAllCustomer() ([]*model.Customer, error) {
 	res, err := r.DB.Query(context.Background(), "SELECT * FROM Customers")
 	if err != nil {
@@ -16,7 +16,7 @@ func (r *PostgresRepository) GetAllCustomer() ([]*model.Customer, error) {
 	allCustomers := []*model.Customer{}
 	for res.Next() {
 		u := &model.Customer{}
-		err := res.Scan(&u.Id, &u.Name, &u.Email, &u.Age, &u.Married)
+		err := res.Scan(&u.ID, &u.Name, &u.Email, &u.Age, &u.Married)
 		if err != nil {
 			return nil, err
 		}
@@ -26,15 +26,16 @@ func (r *PostgresRepository) GetAllCustomer() ([]*model.Customer, error) {
 	return allCustomers, nil
 }
 
-// GET BY ID
-func (r *PostgresRepository) GetByIdCustomer(id uuid.UUID) (*model.Customer, error) {
-	res, err := r.DB.Query(context.Background(), "SELECT * FROM Customers WHERE id=$1", id)
+// GetByIdCustomer in postgres db...
+
+func (r *PostgresRepository) GetByIDCustomer(ID uuid.UUID) (*model.Customer, error) {
+	res, err := r.DB.Query(context.Background(), "SELECT * FROM Customers WHERE id=$1", ID)
 	if err != nil {
 		panic(err)
 	}
 	u := &model.Customer{}
 	for res.Next() {
-		err = res.Scan(&u.Id, &u.Name, &u.Email, &u.Age, &u.Married)
+		err = res.Scan(&u.ID, &u.Name, &u.Email, &u.Age, &u.Married)
 		if err != nil {
 			panic(err)
 		}
@@ -43,32 +44,35 @@ func (r *PostgresRepository) GetByIdCustomer(id uuid.UUID) (*model.Customer, err
 	return u, nil
 }
 
-// DELETE BY ID
-func (r *PostgresRepository) DeleteByIdCustomer(id uuid.UUID) (string, error) {
-	_, err := r.DB.Exec(context.Background(), "DELETE FROM Customers WHERE id = $1", id)
+// DeleteByIdCustomer in postgres db...
+
+func (r *PostgresRepository) DeleteByIDCustomer(ID uuid.UUID) (string, error) {
+	_, err := r.DB.Exec(context.Background(), "DELETE FROM Customers WHERE id = $1", ID)
 	if err != nil {
 		panic(err)
 	}
-	res := "Customer deleted"
+	const res = "Customer deleted"
 	return res, nil
 }
 
-// UPDATE BY ID
-func (r *PostgresRepository) UpdateByIdCustomer(id uuid.UUID, u *model.Customer) (*model.Customer, error) {
+// UpdateByIdCustomer in postgres db...
+
+func (r *PostgresRepository) UpdateByIDCustomer(ID uuid.UUID, u *model.Customer) (*model.Customer, error) {
 	_, err := r.DB.Exec(context.Background(), "UPDATE Customers SET name = $1, email = $2, age = $3, married = $4 WHERE id = $5",
-		u.Name, u.Email, u.Age, u.Married, id)
+		u.Name, u.Email, u.Age, u.Married, ID)
 	if err != nil {
 		return nil, err
 	}
-	u.Id = id
+	u.ID = ID
 	return u, nil
 }
 
-// CREATE
+// CreateCustomer in postgres db...
+
 func (r *PostgresRepository) CreateCustomer(u *model.Customer) (*model.Customer, error) {
 	uuid := uuid.New()
-	u.Id = uuid
-	res, err := r.DB.Query(context.Background(), "INSERT INTO Customers (id,name, email, age, married) VALUES ($1,$2,$3,$4,$5) ", u.Id, u.Name, u.Email, u.Age, u.Married)
+	u.ID = uuid
+	res, err := r.DB.Query(context.Background(), "INSERT INTO Customers (id,name, email, age, married) VALUES ($1,$2,$3,$4,$5) ", u.ID, u.Name, u.Email, u.Age, u.Married)
 	if err != nil {
 		panic(err)
 	}

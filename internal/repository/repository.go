@@ -1,3 +1,4 @@
+// Package repostiroy to interact with DATABASE
 package repository
 
 import (
@@ -5,23 +6,27 @@ import (
 	"github.com/sadetskayfu/rest-golang/internal/model"
 )
 
-// CUSTOMER INTERFACE
+// Customer interface ...
+
 type Customer interface {
 	CreateCustomer(*model.Customer) (*model.Customer, error)
 	GetAllCustomer() ([]*model.Customer, error)
-	GetByIdCustomer(uuid.UUID) (*model.Customer, error)
-	DeleteByIdCustomer(uuid.UUID) (string, error)
-	UpdateByIdCustomer(uuid.UUID, *model.Customer) (*model.Customer, error)
+	GetByIDCustomer(uuid.UUID) (*model.Customer, error)
+	DeleteByIDCustomer(uuid.UUID) (string, error)
+	UpdateByIDCustomer(uuid.UUID, *model.Customer) (*model.Customer, error)
 }
 
-// CAT INTERFACE
+// Cat interface ...
+
 type Cat interface {
 	GetAllCat() ([]*model.Cat, error)
-	GetByIdCat(uuid.UUID) (*model.Cat, error)
-	DeleteByIdCat(uuid.UUID) (string, error)
-	UpdateByIdCat(uuid.UUID, *model.Cat) (*model.Cat, error)
+	GetByIDCat(uuid.UUID) (*model.Cat, error)
+	DeleteByIDCat(uuid.UUID) (string, error)
+	UpdateByIDCat(uuid.UUID, *model.Cat) (*model.Cat, error)
 	CreateCat(*model.Cat) (*model.Cat, error)
 }
+
+// Authentication interface...
 
 type Authentication interface {
 	Registration(*model.User)(*model.User,error)
@@ -29,7 +34,8 @@ type Authentication interface {
 }
 
 
-// REPOSITORY INTERFACE
+// Repository interface ...
+
 type Repository interface {
 	Customer
 	Cat

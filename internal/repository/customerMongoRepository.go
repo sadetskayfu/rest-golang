@@ -7,17 +7,22 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
+// Struct variables for use table in mongo DB
+
 type CustomerMongoDB struct {
 	DataBaseName   string
 	CollectionName string
 }
+
+// Variable for use table in mongo DB
 
 var newCustomerMongoDB = CatMongoDB{
 	DataBaseName:   "rest",
 	CollectionName: "Customers",
 }
 
-// GET ALL
+// GetAllCustomer in mongo db...
+
 func (r *MongoRepository) GetAllCustomer() ([]*model.Customer, error) {
 	filter := bson.M{}
 	res, err := r.DB.Database(newCustomerMongoDB.DataBaseName).Collection(newCustomerMongoDB.CollectionName).Find(context.TODO(), filter)
@@ -35,12 +40,12 @@ func (r *MongoRepository) GetAllCustomer() ([]*model.Customer, error) {
 	}
 	res.Close(context.TODO())
 	return allCustomers, nil
-
 }
 
-// GET BY ID
-func (r *MongoRepository) GetByIdCustomer(id uuid.UUID) (*model.Customer, error) {
-	filter := bson.D{{"_id", id}}
+// GetByIdCustomer in mongo db...
+
+func (r *MongoRepository) GetByIDCustomer(ID uuid.UUID) (*model.Customer, error) {
+	filter := bson.D{{"_id", ID}}
 	u := &model.Customer{}
 	res := r.DB.Database(newCustomerMongoDB.DataBaseName).Collection(newCustomerMongoDB.CollectionName).FindOne(context.TODO(), filter)
 	err := res.Decode(&u)
@@ -50,9 +55,10 @@ func (r *MongoRepository) GetByIdCustomer(id uuid.UUID) (*model.Customer, error)
 	return u, nil
 }
 
-// UPDATE BY ID
-func (r *MongoRepository) UpdateByIdCustomer(id uuid.UUID, u *model.Customer) (*model.Customer, error) {
-	filter := bson.D{{"_id", id}}
+// UpdateByIdCustomer in mongo db...
+
+func (r *MongoRepository) UpdateByIDCustomer(ID uuid.UUID, u *model.Customer) (*model.Customer, error) {
+	filter := bson.D{{"_id", ID}}
 	update := bson.D{
 		{"$set", bson.D{
 			{"Name", u.Name},
@@ -64,24 +70,26 @@ func (r *MongoRepository) UpdateByIdCustomer(id uuid.UUID, u *model.Customer) (*
 	if err != nil {
 		return nil, err
 	}
-	u.Id = id
+	u.ID = ID
 	return u, nil
 }
 
-// DELETE BY ID
-func (r *MongoRepository) DeleteByIdCustomer(id uuid.UUID) (string, error) {
-	filter := bson.D{{"_id", id}}
+// DeleteByIdCustomer in mongo db...
+
+func (r *MongoRepository) DeleteByIDCustomer(ID uuid.UUID) (string, error) {
+	filter := bson.D{{"_id", ID}}
 	_, err := r.DB.Database(newCustomerMongoDB.DataBaseName).Collection(newCustomerMongoDB.CollectionName).DeleteOne(context.TODO(), filter)
 	if err != nil {
 		panic(err)
 	}
-	res := "Customer deleted"
+	const res = "Customer deleted"
 	return res, nil
 }
 
-// CREATE
+// CreateCustomer in mongo db...
+
 func (r *MongoRepository) CreateCustomer(u *model.Customer) (*model.Customer, error) {
-	u.Id = uuid.New()
+	u.ID = uuid.New()
 	_, err := r.DB.Database(newCustomerMongoDB.DataBaseName).Collection(newCustomerMongoDB.CollectionName).InsertOne(context.TODO(), u)
 	if err != nil {
 		return nil, err

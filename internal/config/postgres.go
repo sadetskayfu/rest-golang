@@ -4,22 +4,25 @@ import (
 	"fmt"
 )
 
-var (
-	DBUser = "postgres"
-	DBPassword = "1234"
-	DBName     = "postgres"
-	DBHost     = "localhost"
-	DBPort     = "5432"
-	DBType     = "postgres"
+// Variable for connect to postgres DB
+
+const (
+	dbUser     = "postgres"
+	dbPassword = "1234"
+	dbName     = "postgres"
+	dbHost     = "localhost"
+	dbPort     = "5432"
 )
+
+// Return string for connect to postgres DB
 
 func GetPostgresConnectionString() string {
 	dataBase := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable ",
-		DBHost,
-		DBPort,
-		DBUser,
-		DBName,
-		DBPassword,
+		dbHost,
+		dbPort,
+		dbUser,
+		dbName,
+		dbPassword,
 	)
 	return dataBase
 }

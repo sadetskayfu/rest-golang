@@ -7,7 +7,8 @@ import (
 	"github.com/sadetskayfu/rest-golang/internal/model"
 )
 
-// CREATE
+// CreateCat handler...
+
 func (h *Handler) CreateCat(c echo.Context) error {
 	u := &model.Cat{}
 	err := c.Bind(u)
@@ -21,7 +22,8 @@ func (h *Handler) CreateCat(c echo.Context) error {
 	return c.JSON(http.StatusCreated, res)
 }
 
-// GET ALL
+//  GetAllCat handler...
+
 func (h *Handler) GetAllCat(c echo.Context) error {
 	res, err := h.srv.GetAllCat()
 	if err != nil {
@@ -30,35 +32,38 @@ func (h *Handler) GetAllCat(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
-// GET BY ID
-func (h *Handler) GetByIdCat(c echo.Context) error {
-	id := uuid.Must(uuid.Parse(c.Param("id")))
-	res, err := h.srv.GetByIdCat(id)
+// GetByIdCat handler...
+
+func (h *Handler) GetByIDCat(c echo.Context) error {
+	ID := uuid.Must(uuid.Parse(c.Param("id")))
+	res, err := h.srv.GetByIDCat(ID)
 	if err != nil {
 		panic(err)
 	}
 	return c.JSON(http.StatusOK, res)
 }
 
-// DELETE BY ID
-func (h *Handler) DeleteByIdCat(c echo.Context) error {
-	id := uuid.Must(uuid.Parse(c.Param("id")))
-	res, err := h.srv.DeleteByIdCat(id)
+// DeleteByIdCat handler...
+
+func (h *Handler) DeleteByIDCat(c echo.Context) error {
+	ID := uuid.Must(uuid.Parse(c.Param("id")))
+	res, err := h.srv.DeleteByIDCat(ID)
 	if err != nil {
 		panic(err)
 	}
 	return c.JSON(http.StatusOK, res)
 }
 
-// UPDATE BY ID
-func (h *Handler) UpdateByIdCat(c echo.Context) error {
+// UpdateByIdCat handler...
+
+func (h *Handler) UpdateByIDCat(c echo.Context) error {
 	u := &model.Cat{}
 	err := c.Bind(u)
 	if err != nil {
 		panic(err)
 	}
-	id := uuid.Must(uuid.Parse(c.Param("id")))
-	res, err := h.srv.UpdateByIdCat(id, u)
+	ID := uuid.Must(uuid.Parse(c.Param("id")))
+	res, err := h.srv.UpdateByIDCat(ID, u)
 	if err != nil {
 		panic(err)
 	}

@@ -5,7 +5,8 @@ import (
 	"github.com/sadetskayfu/rest-golang/internal/model"
 )
 
-// CREATE
+// CreateCat service...
+
 func (s *Service) CreateCat(u *model.Cat) (*model.Cat, error) {
 	res, err := s.repo.CreateCat(u)
 	if err != nil {
@@ -14,7 +15,8 @@ func (s *Service) CreateCat(u *model.Cat) (*model.Cat, error) {
 	return res, nil
 }
 
-// GET ALL
+// GetAllCat service...
+
 func (s *Service) GetAllCat() ([]*model.Cat, error) {
 	res, err := s.repo.GetAllCat()
 	if err != nil {
@@ -23,27 +25,30 @@ func (s *Service) GetAllCat() ([]*model.Cat, error) {
 	return res, nil
 }
 
-// GET BY ID
-func (s *Service) GetByIdCat(id uuid.UUID) (*model.Cat, error) {
-	res, err := s.repo.GetByIdCat(id)
+// GetByIdCat service...
+
+func (s *Service) GetByIDCat(ID uuid.UUID) (*model.Cat, error) {
+	res, err := s.repo.GetByIDCat(ID)
 	if err != nil {
 		panic(err)
 	}
 	return res, nil
 }
 
-// DELETE BY ID
-func (s *Service) DeleteByIdCat(id uuid.UUID) (string, error) {
-	res, err := s.repo.DeleteByIdCat(id)
+// DeleteByIdCat service...
+
+func (s *Service) DeleteByIDCat(ID uuid.UUID) (string, error) {
+	res, err := s.repo.DeleteByIDCat(ID)
 	if err != nil {
 		panic(err)
 	}
 	return res, nil
 }
 
-// UPDATE BY ID
-func (s *Service) UpdateByIdCat(id uuid.UUID, u *model.Cat) (*model.Cat, error) {
-	res, err := s.repo.UpdateByIdCat(id, u)
+// UpdateByIdCat service...
+
+func (s *Service) UpdateByIDCat(ID uuid.UUID, u *model.Cat) (*model.Cat, error) {
+	res, err := s.repo.UpdateByIDCat(ID, u)
 	if err != nil {
 		panic(err)
 	}

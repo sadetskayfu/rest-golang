@@ -5,12 +5,14 @@ import (
 	"github.com/jackc/pgx/v4"
 )
 
-// POSTGRES REPOSITORY...
+// PostgresRepository ...
+
 type PostgresRepository struct {
 	DB *pgx.Conn
 }
 
-// NEW POSTGRES REPOSITORY...
+// NewPostgresRepository ...
+
 func NewPostgresRepository(conn *pgx.Conn) *PostgresRepository {
 	fmt.Println("Connect to DATABASE postgres")
 	return &PostgresRepository{

@@ -7,7 +7,7 @@ import (
 	"github.com/sadetskayfu/rest-golang/internal/model"
 )
 
-// CREATE
+// CreateCustomer handler...
 func (h *Handler) CreateCustomer(c echo.Context) error {
 	u := &model.Customer{}
 	err := c.Bind(u)
@@ -21,7 +21,7 @@ func (h *Handler) CreateCustomer(c echo.Context) error {
 	return c.JSON(http.StatusCreated, res)
 }
 
-// GET ALL
+// GetAllCustomer handler...
 func (h *Handler) GetAllCustomer(c echo.Context) error {
 	res, err := h.srv.GetAllCustomer()
 	if err != nil {
@@ -30,36 +30,36 @@ func (h *Handler) GetAllCustomer(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
-// GET BY ID
+// GetByIdCustomer handler...
 func (h *Handler) GetByIdCustomer(c echo.Context) error {
-
-	id := uuid.Must(uuid.Parse(c.Param("id")))
-	res, err := h.srv.GetByIdCustomer(id)
+	ID := uuid.Must(uuid.Parse(c.Param("id")))
+	res, err := h.srv.GetByIDCustomer(ID)
 	if err != nil {
 		panic(err)
 	}
 	return c.JSON(http.StatusOK, res)
 }
 
-// DELETE BY ID
-func (h *Handler) DeleteByIdCustomer(c echo.Context) error {
-	id := uuid.Must(uuid.Parse(c.Param("id")))
-	res, err := h.srv.DeleteByIdCustomer(id)
+// DeleteByIdCustomer handler...
+func (h *Handler) DeleteByIDCustomer(c echo.Context) error {
+	ID := uuid.Must(uuid.Parse(c.Param("id")))
+	res, err := h.srv.DeleteByIDCustomer(ID)
 	if err != nil {
 		panic(err)
 	}
 	return c.JSON(http.StatusOK, res)
 }
 
-// UPDATE BY ID
-func (h *Handler) UpdateByIdCustomer(c echo.Context) error {
+// UpdateByIdCustomer handler...
+
+func (h *Handler) UpdateByIDCustomer(c echo.Context) error {
 	u := &model.Customer{}
 	err := c.Bind(u)
 	if err != nil {
 		panic(err)
 	}
-	id := uuid.Must(uuid.Parse(c.Param("id")))
-	res, err := h.srv.UpdateByIdCustomer(id, u)
+	ID := uuid.Must(uuid.Parse(c.Param("id")))
+	res, err := h.srv.UpdateByIDCustomer(ID, u)
 	if err != nil {
 		panic(err)
 	}
