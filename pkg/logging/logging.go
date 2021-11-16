@@ -2,16 +2,15 @@ package logging
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/sadetskayfu/rest-golang/internal/logger"
 )
 
 type Logger struct {
-	log *logrus.logger
+	log *logrus.Logger
 }
 
 func newLogger() *Logger{
 	return &Logger{
-    log : logrus.new()
+    log : logrus.New(),
 	}
 
 }
@@ -19,3 +18,4 @@ func newLogger() *Logger{
 func (l *Logger) setLevel(){
 	l.log.Formatter = new(logrus.JSONFormatter)
 }
+
