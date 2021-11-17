@@ -1,4 +1,3 @@
-// Package config for connect to DB
 package config
 
 // Return string for connect to mongo DB

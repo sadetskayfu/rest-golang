@@ -11,11 +11,17 @@ import (
 	"github.com/sadetskayfu/rest-golang/internal/model"
 	"github.com/sadetskayfu/rest-golang/internal/repository"
 	"github.com/sadetskayfu/rest-golang/internal/service"
+	"github.com/sadetskayfu/rest-golang/pkg/logging"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func main() {
+
+	// Initial logger
+	log :=logging.NewLogger()
+	log.SetLevel()
+
 	// CONFIG POSTGRES DB
 	// connStr := config.GetPostgresConnectionString()
 	// CONNECT POSTGRES DB
@@ -35,7 +41,7 @@ func main() {
   
 	// repo := repository.NewPostgresRepository(conn) //
 	repo := repository.NewMongoRepository(client)
-	srv := service.NewService(repo)
+	srv := service.NewService(repo,log)
 	hand := handler.NewHandler(srv)
 
 	e := echo.New()

@@ -1,4 +1,3 @@
-// package handler to interact with the front
 package handler
 
 import (

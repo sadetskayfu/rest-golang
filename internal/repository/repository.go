@@ -1,4 +1,3 @@
-// Package repostiroy to interact with DATABASE
 package repository
 
 import (

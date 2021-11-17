@@ -1,7 +1,8 @@
 package repository
 
 import (
-	"github.com/sadetskayfu/pkg/logging/logging"
+	"fmt"
+
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -14,8 +15,7 @@ type MongoRepository struct {
 // NewMongoRepository ...
 
 func NewMongoRepository(client *mongo.Client) *MongoRepository{
-	logging.Logger.info("HGFSDFSDFSDF")
-	
+	fmt.Println("Connected to db mongo")
 	return &MongoRepository{
 		DB : client,
 	}

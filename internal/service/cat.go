@@ -10,8 +10,10 @@ import (
 func (s *Service) CreateCat(u *model.Cat) (*model.Cat, error) {
 	res, err := s.repo.CreateCat(u)
 	if err != nil {
-		return nil, err
+		s.log.Log.Error("Cat creation error")
+		return nil,err
 	}
+	
 	return res, nil
 }
 

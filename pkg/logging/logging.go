@@ -2,20 +2,27 @@ package logging
 
 import (
 	"github.com/sirupsen/logrus"
+	"os"
 )
 
 type Logger struct {
-	log *logrus.Logger
+	Log *logrus.Logger
+	Fields *logrus.Fields
 }
 
-func newLogger() *Logger{
+func NewLogger() *Logger{
 	return &Logger{
-    log : logrus.New(),
+    Log : logrus.New(),
+	Fields: &logrus.Fields{},
 	}
-
 }
 
-func (l *Logger) setLevel(){
-	l.log.Formatter = new(logrus.JSONFormatter)
+func (l *Logger) SetLevel(){
+	l.Log.SetOutput(os.Stdout)
+	l.Log.Formatter = new(logrus.JSONFormatter)
+	l.Log.Level = logrus.InfoLevel
+
+	// logCtx := log.Log.WithField("a", "message here")
+	// logCtx.Info("Message info")
 }
 
